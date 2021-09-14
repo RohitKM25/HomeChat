@@ -1,0 +1,87 @@
+﻿@page "/user/received"
+@inject HttpClient Http
+@inject NavigationManager NavManager
+@using HomeChat.Core.DataModels
+@using Microsoft.AspNetCore.WebUtilities
+@using System.Net.Http.Json
+@using System.Threading
+
+Timeout Count - @timeoutCount
+<h3>Received Messages</h3>
+@if (messages == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Sender ID</th>
+                <th>Receiver ID</th>
+                <th>Content</th>
+                <th>Time</th>
+                <th>Is Read</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var message in messages)
+            {
+                <tr>
+                    <td>@message.Id</td>
+                    <td>@GetUserNameById(message.SenderId)</td>
+                    <td>@GetUserNameById(message.ReceiverId)</td>
+                    <td>@message.Content</td>
+                    <td>@message.TimeStamp</td>
+                    <td>@(message.IsRead==0?"False":"True")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+   }
+@code {
+    private List<MessageModel> messages;
+    private string userId = "";
+    private int timeoutCount = 0;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var uri = NavManager.ToAbsoluteUri(NavManager.Uri);
+        if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("userId", out var _userId))
+        {
+            userId = _userId; 
+        }
+        await LoadData();
+    }
+
+
+    private async Task LoadData()
+    {
+        try
+        {
+            messages = await Http.GetFromJsonAsync<List<MessageModel>>($"user/received?id={userId}");
+        }
+        catch (Exception)
+        {
+        }
+    }
+
+    private string GetUserNameById(int id)
+    {
+        try
+        {
+            return Http.GetFromJsonAsync<List<UserModel>>($"user/filterbyid?id={id}").Result[0].Name;
+        }
+        catch 
+        {
+            return id.ToString();
+        }
+    }
+
+    private bool GetIsReadByInt(int isRead)
+    {
+        return isRead==0?false:true;
+    }
+}
+

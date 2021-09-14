@@ -1,0 +1,46 @@
+﻿@page "/"
+@inject NavigationManager NavManager
+
+<h1>Welcome To Home Chat</h1>
+
+<p>Head to <a href="/users">Users Page</a> to view users on this network</p>
+
+<input type="text" style="height:40px;" id="useridtextbox" value="@userId" @oninput="(EventArgs) => {SetValue(EventArgs.Value.ToString());}"/>
+<br/><br/>
+<button class="btn btn-primary disabled" @onclick="(EventArgs) => {UserIdSubmitButton_Click(buttons[0]);}">View Sent Messages</button>
+<button class="btn btn-primary disabled" @onclick="(EventArgs) => {UserIdSubmitButton_Click(buttons[1]);}">View Received Messages</button>
+<button class="btn btn-primary disabled" @onclick="(EventArgs) => {UserIdSubmitButton_Click(buttons[2]);}">New Message</button>
+
+@code{
+    private string userId = "";
+    private List<string> buttons = new List<string>()
+    {
+        "sent",
+        "received",
+        "send"
+    };
+    private void SetValue(string Value)
+    {
+        userId = Value;
+    }
+    private void UserIdSubmitButton_Click(string location)
+    {
+        if (userId!="")
+        {
+            switch (location)
+            {
+                case "sent":
+                    NavManager.NavigateTo($"user/sent?userId={userId}");
+                    break;
+                case "received":
+                    NavManager.NavigateTo($"user/received?userId={userId}");
+                    break;
+                case "send":
+                    NavManager.NavigateTo($"user/send?userId={userId}");
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+}

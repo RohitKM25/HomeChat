@@ -1,0 +1,112 @@
+﻿@page "/user/send"
+@inject HttpClient Http
+@inject NavigationManager NavManager
+@using HomeChat.Core.DataModels
+@using Microsoft.AspNetCore.WebUtilities
+@using System.ComponentModel.DataAnnotations
+
+<h3>Send Message</h3>
+
+<EditForm Model="@NewMessage" OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="HandleInvalidSubmit">
+        <DataAnnotationsValidator />
+        <div class="row">
+            <div class="col-md-8"> 
+                <div class="row" style="margin-top:10px">
+                    <div class="col-md-12">
+                        @if (userNames!=null)
+                        {
+                            @foreach (var name in userNames)
+                            {
+                                if (name.Key!=int.Parse(userId))
+                                {
+                                    <label for="receiverName_@name.Key">@name.Value</label>
+                                    <input type="checkbox" placeholder="@name.Value" class="form-control" id="receiverName_@name.Key" @onchange="()=>{NewMessage.ReceiverName=name.Key;}"/>
+                                }
+                            }
+                        }
+                        else
+                        {
+                            <p>@error</p>
+                        }
+                        <ValidationMessage For="@(()=>NewMessage.ReceiverName)" />
+                    </div>
+                </div>
+                <div class="row" style="margin-top:10px">
+                    <div class="col-md-12">
+                        <label for="content">Message</label>
+                        <input type="text" class="form-control" id="content" @bind-value="@NewMessage.Content" placeholder="Enter Message." />
+                        <ValidationMessage For="@(()=>NewMessage.Content)" />
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-info" Style="margin-top:10px">Send</button>
+            </div>
+            @if (displayValidationErrorMessages)
+            {
+                <div class="col-md-4" style="margin-top:10px">
+                    <label>Validation Messages: </label>
+                    <ValidationSummary />
+                </div>
+            }
+        </div>
+    </EditForm>
+    @if (displayUserAddedToDB)
+    {
+        <div class="row bg-success text-white" style="margin-top:10px; height:40px">
+            <label class="p-2">User added to database... </label>
+        </div>
+    }
+
+@code {
+
+    private string userId = "";
+    private DateTime timeStamp;
+    private bool isRead = false;
+    private Dictionary<int, string> userNames;
+    private string error = "Oops, there seems to be a problem";
+    MessageFormModel NewMessage = new MessageFormModel();
+    bool displayValidationErrorMessages = false;
+    bool displayUserAddedToDB = false;
+
+    private async Task HandleValidSubmit(EditContext context)
+    {
+        displayValidationErrorMessages = false;
+        _ = await Http.PostAsJsonAsync<MessageModel>("user/send", new MessageModel() { SenderId = int.Parse(userId), ReceiverId = NewMessage.ReceiverName, Content=NewMessage.Content});
+        displayUserAddedToDB = true;
+    }
+    private void HandleInvalidSubmit(EditContext context)
+    {
+    displayValidationErrorMessages = true;
+        displayUserAddedToDB = false;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            var uri = NavManager.ToAbsoluteUri(NavManager.Uri);
+            if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("userId", out var _userId))
+            {
+                userId = _userId;
+            }
+            var users = (await Http.GetFromJsonAsync<List<UserModel>>("user/list"));
+            userNames = new Dictionary<int, string>();
+            foreach (var user in users)
+            {
+                userNames.Add(user.Id, user.Name);
+            }
+        }
+        catch (Exception ex)
+        {
+            error = ex.Message;
+        }
+
+    }
+
+    public class MessageFormModel
+    {
+        [Required(ErrorMessage = "Receiver Name is required")]
+        public int ReceiverName { get; set; }
+        [Required(ErrorMessage = "Content is required")]
+        public string Content { get; set; } = "";
+    }
+}

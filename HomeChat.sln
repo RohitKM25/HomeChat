@@ -1,0 +1,67 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31612.314
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeChat.API", "HomeChat.API\HomeChat.API.csproj", "{191E234A-6ADD-412C-BE99-424F4F2959CC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeChat.Core", "HomeChat.Core\HomeChat.Core.csproj", "{81B8A0EE-57E0-46AE-A46B-E7A8AEB76773}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{CA145CCF-B913-42FB-AC0A-E02B9DF8F5C3}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "HomeChatDatabase", "HomeChatDatabase\HomeChatDatabase.sqlproj", "{A3076899-1DC3-4CBB-9487-3E03FDFD9212}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{786CB5B3-5F6C-4EBD-8269-4C71BF2523A5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeChat.UI.CLI", "HomeChat.UI.CLI\HomeChat.UI.CLI.csproj", "{CF77F855-53BE-4DAC-A330-585CC0515413}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeChat.UI.Blazor", "HomeChat.UI.Blazor\HomeChat.UI.Blazor.csproj", "{67EED468-8DBE-4B27-BBFC-491E467B6064}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeChat.UI.BlazorS", "HomeChat.UI.BlazorS\HomeChat.UI.BlazorS.csproj", "{8E2D7C50-F428-455E-95C1-2FCD53B051FF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{191E234A-6ADD-412C-BE99-424F4F2959CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{191E234A-6ADD-412C-BE99-424F4F2959CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{191E234A-6ADD-412C-BE99-424F4F2959CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{191E234A-6ADD-412C-BE99-424F4F2959CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81B8A0EE-57E0-46AE-A46B-E7A8AEB76773}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81B8A0EE-57E0-46AE-A46B-E7A8AEB76773}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81B8A0EE-57E0-46AE-A46B-E7A8AEB76773}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81B8A0EE-57E0-46AE-A46B-E7A8AEB76773}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3076899-1DC3-4CBB-9487-3E03FDFD9212}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3076899-1DC3-4CBB-9487-3E03FDFD9212}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3076899-1DC3-4CBB-9487-3E03FDFD9212}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{A3076899-1DC3-4CBB-9487-3E03FDFD9212}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3076899-1DC3-4CBB-9487-3E03FDFD9212}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3076899-1DC3-4CBB-9487-3E03FDFD9212}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{CF77F855-53BE-4DAC-A330-585CC0515413}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF77F855-53BE-4DAC-A330-585CC0515413}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF77F855-53BE-4DAC-A330-585CC0515413}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF77F855-53BE-4DAC-A330-585CC0515413}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67EED468-8DBE-4B27-BBFC-491E467B6064}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67EED468-8DBE-4B27-BBFC-491E467B6064}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67EED468-8DBE-4B27-BBFC-491E467B6064}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67EED468-8DBE-4B27-BBFC-491E467B6064}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E2D7C50-F428-455E-95C1-2FCD53B051FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E2D7C50-F428-455E-95C1-2FCD53B051FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E2D7C50-F428-455E-95C1-2FCD53B051FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E2D7C50-F428-455E-95C1-2FCD53B051FF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A3076899-1DC3-4CBB-9487-3E03FDFD9212} = {CA145CCF-B913-42FB-AC0A-E02B9DF8F5C3}
+		{CF77F855-53BE-4DAC-A330-585CC0515413} = {786CB5B3-5F6C-4EBD-8269-4C71BF2523A5}
+		{67EED468-8DBE-4B27-BBFC-491E467B6064} = {786CB5B3-5F6C-4EBD-8269-4C71BF2523A5}
+		{8E2D7C50-F428-455E-95C1-2FCD53B051FF} = {786CB5B3-5F6C-4EBD-8269-4C71BF2523A5}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DE4E2B3B-1964-468A-A73B-78DFFFF07B71}
+	EndGlobalSection
+EndGlobal
